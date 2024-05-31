@@ -20,12 +20,17 @@ export default function Adddata() {
   const router = useRouter();
   const {username} = useContext(StudentContext)
   const [alertuser,setAlertuser] = useState(false)
-  const { isAuthenticated, } = useContext(StudentContext);
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/Login');
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/Login");
+     
     }
-  }, [isAuthenticated]);
+
+  
+   
+  
+  }, []);
 
 
 
