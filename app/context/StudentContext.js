@@ -1,9 +1,12 @@
 "use client"
+import React from 'react';
 import { createContext, useState , useContext, useEffect} from 'react';
 import {useRouter} from 'next/navigation';
  const StudentContext = createContext();
+ 
 
-export const StudentProvider = ({ children }) => {
+
+export const StudentProvider = ({children}) => {
   const [studentData, setStudentData] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username,setUsername] = useState('')
@@ -17,7 +20,7 @@ export const StudentProvider = ({ children }) => {
       setIsAuthenticated(false);
       router.push('/Login');
     }
-  }, []);
+  }, [router]);
 
 
   return (

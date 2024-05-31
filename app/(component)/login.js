@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import StudentContext from '../context/StudentContext';
-export default function login() {
+export default function Login() {
   const [names, setNames] = useState('');
   const [passwords, setPasswords] = useState('');
   
@@ -12,7 +12,7 @@ export default function login() {
   const [haserr, setHaserr] = useState(false);
   const [showloader, setShowloader] = useState(false);
   const router = useRouter();
-const {username,setUsername} = useContext(StudentContext)
+const {setUsername} = useContext(StudentContext)
   const handleSubmit = () => {
     setShowloader(true);
     const name1 = names.trim();
@@ -32,7 +32,8 @@ const {username,setUsername} = useContext(StudentContext)
         .then(res => {
           console.log(res.data.token);
           localStorage.setItem("token",res.data.token);
-setShowloader(false); router.push('/');
+setShowloader(false); 
+router.push('/');
           setUsername(names)
         })
         .catch(error => {

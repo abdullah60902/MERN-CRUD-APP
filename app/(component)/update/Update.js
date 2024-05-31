@@ -1,5 +1,5 @@
 "use client"
-import next from "next";
+
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import img1 from '../../imagesnew/tslmy.png';
@@ -8,7 +8,6 @@ import Link from "next/link";
 import StudentContext from '../../context/StudentContext';
 import { useRouter } from "next/navigation";
 export default function Update() {
-
   const [name, setName] = useState('');
   const [urlcode, setUrlcode] = useState(null);
   const [fathername, setFathername] = useState('');
@@ -27,9 +26,9 @@ export default function Update() {
     if (!isAuthenticated) {
       router.push('/Login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated]);
 
-
+console.log(hjk);
   console.log(studentData.hjk);
 console.log(imgId);
  
@@ -146,7 +145,7 @@ return (
               <Image src={img} alt="" width={100} height={50} className="w-[50px]" />
               <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
               <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
-              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout  </button>
+              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout</button>
             </div>
             </div>
             <h1 className="text-[36px] text-[white] flex justify-center pt-[70px]">Enter Student data </h1>

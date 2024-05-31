@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import Image from "next/image";
 import { useState,useEffect, useContext } from "react";
 import img1 from '../../imagesnew/tslmy.png';
@@ -18,7 +18,7 @@ export default function Adddata() {
   const [haserr, setHaserr] = useState(false);
   const [showloader, setShowloader] = useState(false);
   const router = useRouter();
-  const {username,setUsername} = useContext(StudentContext)
+  const {username} = useContext(StudentContext)
   const [alertuser,setAlertuser] = useState(false)
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -151,7 +151,7 @@ return (
               <Image src={img} alt="" width={100} height={50} className="w-[50px]" />
               <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
               <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
-              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout  </button>
+              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout</button>
             </div>
             <h1 className="text-[36px] text-[white] flex justify-center pt-[70px]">Enter Student data </h1>
             <div className="ml-[35%] mr-[35%]">

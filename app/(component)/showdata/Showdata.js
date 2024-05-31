@@ -8,6 +8,7 @@ import { MdEdit } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import StudentContext from '../../context/StudentContext';
 import Link from 'next/link';
+import Image from 'next/image';
 export default function Showdata() {
   const [students, setStudents] = useState([]);
   const [images, setImages] = useState([]);
@@ -16,18 +17,18 @@ export default function Showdata() {
   const [studentid, setStudentid] = useState(null)
   const [idimg, setIdimg] = useState(null)
   const [imgshowalone, setImgshowalone] = useState(null)
-const router = useRouter();
-  const { studentData, setStudentData } = useContext(StudentContext);
-  const { isAuthenticated ,setIsAuthenticated} = useContext(StudentContext);
+  const router = useRouter();
+  const { setStudentData } = useContext(StudentContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(StudentContext);
   useEffect(() => {
     if (!isAuthenticated) {
       router.push('/Login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated]);
 
 
   const [studentshowalone, setStudentshowalone] = useState(null);
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const imgResponse = await axios.get('http://localhost:3000/img');
@@ -46,7 +47,7 @@ useEffect(() => {
   if (error) {
     return <div className="text-red-500 font-bold text-center mt-4">Error: {error}</div>;
   }
-const imgdisplay = (student, index) => {
+  const imgdisplay = (student, index) => {
     const id = student._id;
     const imgid = images[index]._id
     console.log(id, imgid);
@@ -55,7 +56,7 @@ const imgdisplay = (student, index) => {
     setShowimg(true)
     getTheItemsById(index)
   }
-const getTheItemsById = async (index) => {
+  const getTheItemsById = async (index) => {
     try {
       var GetImgId = await axios.get('http://localhost:3000/img/', idimg)
       const getimgSucess = GetImgId.data.img_new[index]
@@ -70,7 +71,7 @@ const getTheItemsById = async (index) => {
       setError(error.message)
     }
   };
-const deleteo = async (imglinki, student, index) => {
+  const deleteo = async (imglinki, student, index) => {
     const secondstId = student._id;
     const secImgId = images[index]._id;
     console.log('Image ID:', secImgId);
@@ -86,36 +87,36 @@ const deleteo = async (imglinki, student, index) => {
       console.error('Error deleting image or student:', error.response ? error.response.data : error.message);
     }
   };
-const handleEdit = (student, index) => {
-const imgId = images[index]._id;
-const hjk = student._id
+  const handleEdit = (student, index) => {
+    const imgId = images[index]._id;
+    const hjk = student._id
     setStudentData({ hjk, imgId })
-router.push('/Upload');
-}
-const logOut = ()=>{
-  localStorage.removeItem("token");
-  router.push('/Login')
-}
-return (
+    router.push('/Upload');
+  }
+  const logOut = () => {
+    localStorage.removeItem("token");
+    router.push('/Login')
+  }
+  return (
     <div className="p-4" >
       <div className="flex justify-between  item-center">
-              <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
-              <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
-              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout  </button>
-            </div>
+        <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
+        <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
+        <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout</button>
+      </div>
       <h1 className="text-3xl font-semibold mb-6 text-center mt-[20px]">Student Data</h1>
-{students.length > 0 ? (
+      {students.length > 0 ? (
         <div className=" h-[70vh] overflow-auto py-6">
           <table className="min-w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-xl rounded-lg ">
             <thead className="bg-gradient-to-r from-purple-500 to-pink-500">
               <tr>
                 <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Name</th>
-                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Father's Name</th>
-                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Roll No</th>
-                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Class Name</th>
+                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Father &apos; Name</th>
+                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Roll&apos; No</th>
+                <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Class&apos; Name</th>
                 <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Photo</th>
                 <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Action</th>
-                </tr>
+              </tr>
             </thead>
             <tbody>
               {students.map((student, index) => {
@@ -129,7 +130,7 @@ return (
                     <td className="py-4 px-8 border-b border-white text-[24px]">{student?.classname?.length > 10 ? student.classname.slice(0, 10) + "..." : student.classname}</td>
                     <td className="py-4 px-8 border-b border-white ">
                       {img ? (
-                        <img src={img.photo} alt={student.username} className="w-24  h-28 rounded-lg shadow-md transform hover:scale-105 transition duration-200" onClick={() => imgdisplay(student, index)} />
+                        <Image src={img.photo} alt={student.username} width={100} height={100} className="w-24  h-28 rounded-lg shadow-md transform hover:scale-105 transition duration-200" onClick={() => imgdisplay(student, index)} />
                       ) : (
                         <p className="italic text-gray-200">No image available</p>
                       )}
@@ -177,23 +178,23 @@ return (
           </div>
         </div>
       )}
-{
+      {
         showimg &&
         <div className='h-full drop-shadow-2xl w-full bg-[#7a7a7a69] absolute top-[0px] left-[0px] '>
           <div className='w-[500px] h-[600px] border-solid bg-[#46b4ab] rounded-lg  drop-shadow-lg absolute  top-[150px] right-[620px] animate-myanimation		'>
             <div className=''>
-              <img src={imgshowalone?.photo} alt="" className='w-[500px] h-[450px] rounded-lg drop-shadow-lg ' />
+              <Image src={imgshowalone?.photo} alt=""  className='w-[500px] h-[450px] rounded-lg drop-shadow-lg ' width={500} height={450}/>
 
             </div>
             <div className='flex justify-between pt-[20px]'>
               <button className='w-[200px] h-[40px] flex bg-[#0e282e] text-center py-[5px] px-[15px] rounded-md drop-shadow-lg shadow-[#1e413f]'>
-                <p className='text-[18px] text-[white] font-semibold'>Name: </p>
+                <p className='text-[18px] text-[white] font-semibold'>Name:&apos; </p>
                 <p className='text-[18px] text-[white] italic pl-[3px]'>
                   {studentshowalone?.username?.length > 10 ? studentshowalone?.username.slice(0, 10) + "..." : studentshowalone?.username}
                 </p>
               </button>
               <button className='w-[200px] h-[40px] flex bg-[#0e282e] text-center py-[5px] px-[15px] rounded-md drop-shadow-lg shadow-[#1e413f]'>
-                <p className='text-[18px] text-[white] font-semibold'>Father: </p>
+                <p className='text-[18px] text-[white] font-semibold'>Father:&apos;</p>
                 <p className='text-[18px] text-[white] italic pl-[3px]'>
                   {studentshowalone?.father?.length > 10 ? studentshowalone?.father.slice(0, 10) + "..." : studentshowalone?.father}
                 </p>
@@ -204,13 +205,13 @@ return (
             </p>
             <div className='flex justify-between'>
               <button className='w-[200px] h-[40px] flex bg-[#0e282e] text-center py-[5px] px-[15px] rounded-md drop-shadow-lg shadow-[#1e413f]'>
-                <p className='text-[18px] text-[white] font-semibold'>ROll-no: </p>
+                <p className='text-[18px] text-[white] font-semibold'>ROll-no:&apos;</p>
                 <p className='text-[18px] text-[white] italic pl-[3px]'>
                   {String(studentshowalone?.Roll).length > 6 ? String(studentshowalone?.Roll).slice(0, 6) + "..." : studentshowalone?.Roll}
                 </p>
               </button>
               <button className='w-[200px] h-[40px] flex bg-[#0e282e] text-center py-[5px] px-[15px] rounded-md drop-shadow-lg shadow-[#1e413f]'>
-                <p className='text-[18px] text-[white] font-semibold'>Class: </p>
+                <p className='text-[18px] text-[white] font-semibold'>Class:&apos;</p>
                 <p className='text-[18px] text-[white] italic pl-[3px]'>
                   {studentshowalone?.classname?.length > 10 ? studentshowalone?.classname.slice(0, 8) + "..." : studentshowalone?.classname}
                 </p>
