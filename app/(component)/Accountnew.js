@@ -85,18 +85,35 @@ export default function AccountNew() {
       }
 
       {!showloader && 
-        <div>
-          <h1 className='text-[32px] font-semibold text-center items-center mt-[200px]'>SignUp to create account</h1>
-          <p className='text-[12px] text-center mt-[10px] font-semibold'>Already have an account? <Link href={'/Login'} className='text-[#9533b3]'>login</Link></p>
-          <form action="" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-            <input type="text" placeholder='UserName' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' onChange={(e) => { setNames(e.target.value) }} />
-            <input type="Email" placeholder='Email' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' required onChange={(e) => { setEmails(e.target.value) }} />
-            <input type="password" placeholder='Password' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' required onChange={(e) => { setPasswords(e.target.value) }} />
-            <input type="text" placeholder='Phone' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' required onChange={(e) => { setPhones(e.target.value) }} />
-            <input type="text" placeholder='Gender' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' required onChange={(e) => { setGenders(e.target.value) }} />
-            <button type='submit' className='w-[120px] h-[40px] rounded-md bg-[#86269e] text-[white] ml-[830px] my-[50px]'>SignUp</button>
-          </form>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-3xl font-semibold mb-4">Sign Up to Create an Account</h1>
+      <p className="text-sm mb-8">Already have an account? <Link href={'/Login'} className="text-[#9533b3]">Login</Link></p>
+      <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="w-full max-w-md">
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-sm font-semibold">Username</label>
+          <input type="text" id="username" placeholder="Username" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" onChange={(e) => { setNames(e.target.value) }} />
         </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-semibold">Email</label>
+          <input type="email" id="email" placeholder="Email" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setEmails(e.target.value) }} />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-sm font-semibold">Password</label>
+          <input type="password" id="password" placeholder="Password" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setPasswords(e.target.value) }} />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phone" className="block text-sm font-semibold">Phone</label>
+          <input type="text" id="phone" placeholder="Phone" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setPhones(e.target.value) }} />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="gender" className="block text-sm font-semibold">Gender</label>
+          <input type="text" id="gender" placeholder="Gender" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setGenders(e.target.value) }} />
+        </div>
+        <button type="submit" className="w-full h-10 bg-purple-600 text-white rounded-md mt-2">Sign Up</button>
+      </form>
+    </div>
+    
+     
       }
       {haserr && <p className='text-[red] text-[20px] ml-[800px]'>{err}</p>}
     </>

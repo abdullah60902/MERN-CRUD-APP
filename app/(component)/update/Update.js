@@ -138,33 +138,39 @@ return (
               </div>
             </div>
           </div>}
-        {!showloader && !haserr &&
-          <div>
-            <div className="">
-            <div className="flex justify-between  item-center">
-              <Image src={img} alt="" width={100} height={50} className="w-[50px]" />
-              <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
-              <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
-              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout</button>
-            </div>
-            </div>
-            <h1 className="text-[36px] text-[white] flex justify-center pt-[70px]">Enter Student data </h1>
-            <div className="ml-[35%] mr-[35%]">
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px] bg-[#fdf7f7de]" placeholder="Name" onChange={(e) => { setName(e.target.value) }} value={name} />
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Father_Name" onChange={(e) => { setFathername(e.target.value) }} value={fathername} />
-              <input type="number" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Roll_No" onChange={(e) => { setRoll(e.target.value) }} value={roll} />
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Class_Name" onChange={(e) => { setClassn(e.target.value) }} value={classn} />
-              <h1 className="text-[26px] text-[white] ml-[200px]">Select Image</h1>
-              <form>
-                <input type="file" className="ml-[200px] py-7" onChange={(e) => imgpath(e)}  />
-              </form>
-            </div>
-            <button onClick={submithandler} className="bg-[green] w-[150px] h-[40px] ml-[45%] mt-[20px] rounded-md">Submit</button>
-          </div>}
-        {haserr &&
-          <p className="text-[red] text-[40px] flex justify-center pt-[5] ">{err}</p>
-        }
+          {!showloader && !haserr &&
+  <div>
+    <div className="p-4">
+      <div className="flex flex-wrap justify-between items-center">
+        <Image src={img} alt="" width={100} height={50} className="w-12 sm:w-24" />
+        <Link href='/Showstudent'>
+          <button className="w-36 h-10 text-white bg-blue-500 rounded-md m-2">Student-list</button>
+        </Link>
+        <Link href='/'>
+          <button className="w-36 h-10 text-white bg-blue-500 rounded-md m-2">Home</button>
+        </Link>
+        <button className="w-36 h-10 text-white bg-blue-600 rounded-md m-2" onClick={logOut}>Logout</button>
       </div>
+    </div>
+    <h1 className="text-2xl sm:text-4xl text-white flex justify-center pt-8">Enter Student Data</h1>
+    <div className="px-4 sm:px-24 lg:px-48 xl:px-64">
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Name" onChange={(e) => { setName(e.target.value) }} value={name} />
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Father_Name" onChange={(e) => { setFathername(e.target.value) }} value={fathername} />
+      <input type="number" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Roll_No" onChange={(e) => { setRoll(e.target.value) }} value={roll} />
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Class_Name" onChange={(e) => { setClassn(e.target.value) }} value={classn} />
+      <h1 className="text-xl sm:text-2xl text-white ml-4 sm:ml-8">Select Image</h1>
+      <form className="ml-4 sm:ml-8 py-4">
+        <input type="file" className="py-4" onChange={(e) => imgpath(e)} />
+      </form>
+    </div>
+    <button onClick={submithandler} className="bg-green-500 w-36 h-10 mx-auto mt-4 rounded-md block">Submit</button>
+  </div>
+}
+{haserr &&
+  <p className="text-red-600 text-2xl flex justify-center pt-5">{err}</p>
+}
+</div>
+
     </>
   );
 }

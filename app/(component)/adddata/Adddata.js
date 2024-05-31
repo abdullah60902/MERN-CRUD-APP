@@ -20,21 +20,13 @@ export default function Adddata() {
   const router = useRouter();
   const {username} = useContext(StudentContext)
   const [alertuser,setAlertuser] = useState(false)
+  const { isAuthenticated, setIsAuthenticated } = useContext(StudentContext);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/Login");
-     
+    if (!isAuthenticated) {
+      router.push('/Login');
     }
-
-  
-   
-  
-  }, []);
-
-
-
-  useEffect(()=>{
+  }, [isAuthenticated]);
+useEffect(()=>{
     setAlertuser(true)
   },[username])
 
@@ -144,41 +136,41 @@ return (
               </div>
             </div>
           </div>}
-        {!showloader && !haserr &&
-          <div>
+          {!showloader && !haserr &&
+  <div>
 
-            <div className="flex justify-between  item-center">
-              <Image src={img} alt="" width={100} height={50} className="w-[50px]" />
-              <Link href='/Showstudent'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Student-list</button></Link>
-              <Link href='/'><button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md">Home</button></Link>
-              <button className="w-[150px] h-[40px] text-[white]  bg-[blue] rounded-md" onClick={logOut}>Logout</button>
-            </div>
-            <h1 className="text-[36px] text-[white] flex justify-center pt-[70px]">Enter Student data </h1>
-            <div className="ml-[35%] mr-[35%]">
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px] bg-[#fdf7f7de]" placeholder="Name" onChange={(e) => { setName(e.target.value) }} />
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Father_Name" onChange={(e) => { setFathername(e.target.value) }} />
-              <input type="number" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Roll_No" onChange={(e) => { setRoll(e.target.value) }} />
-              <input type="text" className="my-[30px] mx-[20px] w-[500px] h-[60px] rounded-lg outline-none pl-[30px]" placeholder="Class_Name" onChange={(e) => { setClassn(e.target.value) }} />
-              <h1 className="text-[26px] text-[white] ml-[200px]">Select Image</h1>
-              <form>
-                <input type="file" className="ml-[200px] py-7" onChange={(e) => imgpath(e)} />
-              </form>
-            </div>
-            <button onClick={submithandler} className="bg-[green] w-[150px] h-[40px] ml-[45%] mt-[20px] rounded-md">Submit</button>
-            { alertuser &&
-            <div className="w-[500px] h-[150px] border-solid border-2 bg-[white]  drop-shadow-lg  shadow-black  rounded-lg absolute top-0 right-[630px] animate-myanimation">
-<h1 className="text-[20px]   text-center pt-[10px]">This site owner Abdullah Say :</h1>
-<p className="text-center pt-[20px] "> Welcome:{username}</p>
-<button className="w-[90px] h-[40px] bg-[#3552af] text-[white] font-semibold text-[20px] rounded-md ml-[410px] mt-[24.6px]" onClick={stop}>Ok</button>
-            </div>}
-
-
-
-          </div>}
-        {haserr &&
-          <p className="text-[red] text-[40px] flex justify-center pt-[5] ">{err}</p>
-        }
+    <div className="flex flex-wrap justify-between items-center p-4">
+      <Image src={img} alt="" width={100} height={50} className="w-12 sm:w-24" />
+      <Link href='/Showstudent'><button className="w-36 h-10 text-white bg-blue-500 rounded-md m-2">Student-list</button></Link>
+      <Link href='/'><button className="w-36 h-10 text-white bg-blue-500 rounded-md m-2">Home</button></Link>
+      <button className="w-36 h-10 text-white bg-blue-600 rounded-md m-2" onClick={logOut}>Logout</button>
+    </div>
+    <h1 className="text-2xl sm:text-4xl text-white flex justify-center pt-8">Enter Student Data</h1>
+    <div className="px-4 sm:px-24 lg:px-48 xl:px-64">
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Name" onChange={(e) => { setName(e.target.value) }} />
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Father_Name" onChange={(e) => { setFathername(e.target.value) }} />
+      <input type="number" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Roll_No" onChange={(e) => { setRoll(e.target.value) }} />
+      <input type="text" className="my-4 mx-2 w-full sm:w-80 h-14 rounded-lg outline-none pl-4 bg-gray-100" placeholder="Class_Name" onChange={(e) => { setClassn(e.target.value) }} />
+      <h1 className="text-xl sm:text-2xl text-white ml-4 sm:ml-8">Select Image</h1>
+      <form className="ml-4 sm:ml-8 py-4">
+        <input type="file" className="py-4" onChange={(e) => imgpath(e)} />
+      </form>
+    </div>
+    <button onClick={submithandler} className="bg-green-500 w-36 h-10 mx-auto mt-4 rounded-md block">Submit</button>
+    { alertuser &&
+      <div className="w-64 sm:w-80 lg:w-96 h-36 sm:h-40 border-solid border-2 bg-white drop-shadow-lg shadow-black rounded-lg fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 animate-myanimation">
+        <h1 className="text-xl text-center pt-4">This site owner Abdullah Say:</h1>
+        <p className="text-center pt-4">Welcome: {username}</p>
+        <button className="w-20 h-10 bg-blue-600 text-white font-semibold text-lg rounded-md mx-auto mt-4 block" onClick={stop}>Ok</button>
       </div>
+    }
+  </div>
+}
+{haserr &&
+  <p className="text-red-600 text-2xl flex justify-center pt-5">{err}</p>
+}
+</div>
+
     </>
   );
 }

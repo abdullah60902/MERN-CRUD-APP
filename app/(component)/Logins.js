@@ -81,16 +81,22 @@ router.push('/');
       }
 
       {!showloader && 
-        <div>
-          <h1 className='text-[32px] font-semibold text-center items-center mt-[200px]'>Login to your account</h1>
-          <p className='text-[12px] text-center mt-[10px] font-semibold'> have no account? <Link href={'/Signup'} className='text-[#9533b3]'>Signup</Link></p>
-          <form action="" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-            <input type="text" placeholder='UserName' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' onChange={(e) => { setNames(e.target.value) }} />
-            <input type="password" placeholder='Password' className='w-[500px] h-[40px] border-solid border-[#cdd1d3] border-2 outline-none rounded-md pl-[20px] font-semibold mt-[20px] ml-[650px]' required onChange={(e) => { setPasswords(e.target.value) }} />
-            
-            <button type='submit' className='w-[120px] h-[40px] rounded-md bg-[#86269e] text-[white] ml-[830px] my-[50px]'>Login</button>
-          </form>
-        </div>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-3xl font-semibold mb-4">Login to Your Account</h1>
+        <p className="text-sm mb-8">Don't have an account? <Link href={'/Signup'} className="text-[#9533b3]">Signup</Link></p>
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="w-full max-w-md">
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-sm font-semibold">Username</label>
+            <input type="text" id="username" placeholder="Username" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" onChange={(e) => { setNames(e.target.value) }} />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-semibold">Password</label>
+            <input type="password" id="password" placeholder="Password" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setPasswords(e.target.value) }} />
+          </div>
+          <button type="submit" className="w-full h-10 bg-purple-600 text-white rounded-md mt-2">Login</button>
+        </form>
+      </div>
+      
       }
       {haserr && <p className='text-[red] text-[20px] text-center'>{err}</p>}
     </>
