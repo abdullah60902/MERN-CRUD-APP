@@ -19,12 +19,13 @@ export default function Showdata() {
   const [imgshowalone, setImgshowalone] = useState(null)
   const router = useRouter();
   const { setStudentData } = useContext(StudentContext);
-  const { isAuthenticated, setIsAuthenticated } = useContext(StudentContext);
+  
   useEffect(() => {
-    if (!isAuthenticated) {
+    const token = localStorage.getItem("token")
+    if (!token) {
       router.push('/Login');
     }
-  }, [isAuthenticated]);
+  }, );
 
 
   const [studentshowalone, setStudentshowalone] = useState(null);
@@ -81,7 +82,7 @@ export default function Showdata() {
       console.log('Image delete response:', imgDeleteResponse);
       const studentDeleteResponse = await axios.delete(`https://mern-api-ftcs.vercel.app/student/${secondstId}`);
       console.log('Student delete response:', studentDeleteResponse);
-      setIsAuthenticated(true)
+    
       window.location.reload();
       
     } catch (error) {
