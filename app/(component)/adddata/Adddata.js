@@ -20,11 +20,9 @@ export default function Adddata() {
   const router = useRouter();
   const {username} = useContext(StudentContext)
   const [alertuser,setAlertuser] = useState(false)
-  const { isAuthenticated, setIsAuthenticated } = useContext(StudentContext);
+  const { isAuthenticated } = useContext(StudentContext);
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/Login');
-    }
+
   }, [isAuthenticated]);
 useEffect(()=>{
     setAlertuser(true)
@@ -47,13 +45,15 @@ useEffect(()=>{
       setShowloader(false);
     } else {
       
+
+      
       
       
 
       const formdata = new FormData();
       formdata.append('photo', urlcode);
 
-      axios.post("http://localhost:3000/img", formdata, {
+      axios.post("https://mern-api-ftcs.vercel.app/img", formdata, {
         headers:{
           Authorization:'Bearer '+localStorage.getItem("token")
         }
@@ -61,7 +61,7 @@ useEffect(()=>{
         .then(res => {
           console.log(res);
           setImg(img1);
-          axios.post("http://localhost:3000/student", {
+          axios.post("https://mern-api-ftcs.vercel.app/student", {
             username: name,
             father: fathername,
             Roll: roll,

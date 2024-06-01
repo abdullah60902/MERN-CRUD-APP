@@ -24,7 +24,7 @@ const {setUsername} = useContext(StudentContext)
       setErr("Please fill all the fields");
       setShowloader(false);
     } else {
-      axios.post('http://localhost:3000/user/login', {
+      axios.post('https://mern-api-ftcs.vercel.app/user/login', {
         Name: name1,
         password: password1,
         
@@ -38,9 +38,9 @@ router.push('/');
         })
         .catch(error => {
           console.log(error);
-          setShowloader(false);
           setHaserr(true);
-          setErr(error.response.data.msg);
+          setErr(error.response?.data?.msg );
+          setShowloader(false);
         });
     }
   };
@@ -95,10 +95,11 @@ router.push('/');
           </div>
           <button type="submit" className="w-full h-10 bg-purple-600 text-white rounded-md mt-2">Login</button>
         </form>
+        {  haserr &&<p className='text-[red] text-[20px] mt-[20px]'>{err}</p>}
       </div>
       
       }
-      {haserr && <p className='text-[red] text-[20px] text-center'>{err}</p>}
+    
     </>
   );
 }

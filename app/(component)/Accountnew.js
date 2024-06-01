@@ -28,7 +28,7 @@ export default function AccountNew() {
       setErr("Please fill all the fields");
       setShowloader(false);
     } else {
-      axios.post('http://localhost:3000/user/signup', {
+      axios.post('https://mern-api-ftcs.vercel.app/user/signup', {
         Name: name1,
         email: email1,
         password: password1,
@@ -42,9 +42,9 @@ export default function AccountNew() {
         })
         .catch(error => {
           console.log(error);
-          setShowloader(false);
           setHaserr(true);
           setErr(error.response?.data?.message || error.message || "An error occurred");
+          setShowloader(false);
         });
     }
   };
@@ -110,12 +110,14 @@ export default function AccountNew() {
           <input type="text" id="gender" placeholder="Gender" className="w-full h-10 border border-gray-300 rounded-md px-3 mt-1 outline-none" required onChange={(e) => { setGenders(e.target.value) }} />
         </div>
         <button type="submit" className="w-full h-10 bg-purple-600 text-white rounded-md mt-2">Sign Up</button>
+
       </form>
+      {  haserr &&<p className='text-[red] text-[20px] mt-[20px]'>{err}</p>}
     </div>
     
      
       }
-      {haserr && <p className='text-[red] text-[20px] ml-[800px]'>{err}</p>}
+    
     </>
   );
 }

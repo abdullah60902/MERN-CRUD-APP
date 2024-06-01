@@ -31,8 +31,8 @@ export default function Showdata() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const imgResponse = await axios.get('http://localhost:3000/img');
-        const studentResponse = await axios.get('http://localhost:3000/student');
+        const imgResponse = await axios.get('https://mern-api-ftcs.vercel.app/img');
+        const studentResponse = await axios.get('https://mern-api-ftcs.vercel.app/student');
         setStudents(studentResponse.data.Studentdata);
         setImages(imgResponse.data.img_new);
       } catch (err) {
@@ -58,11 +58,11 @@ export default function Showdata() {
   }
   const getTheItemsById = async (index) => {
     try {
-      var GetImgId = await axios.get('http://localhost:3000/img/', idimg)
+      var GetImgId = await axios.get('https://mern-api-ftcs.vercel.app/img/', idimg)
       const getimgSucess = GetImgId.data.img_new[index]
       console.log(getimgSucess);
       setImgshowalone(getimgSucess)
-      var GetStudentId = await axios.get('http://localhost:3000/student/', studentid)
+      var GetStudentId = await axios.get('https://mern-api-ftcs.vercel.app/student/', studentid)
       const getStudentSucess = GetStudentId.data.Studentdata[index]
       console.log(getStudentSucess);
       setStudentshowalone(getStudentSucess)
@@ -77,12 +77,13 @@ export default function Showdata() {
     console.log('Image ID:', secImgId);
     console.log('Student ID:', secondstId);
     try {
-      const imgDeleteResponse = await axios.delete(`http://localhost:3000/img`, { params: { id: secImgId, imageUrl: imglinki } });
+      const imgDeleteResponse = await axios.delete(`https://mern-api-ftcs.vercel.app/img`, { params: { id: secImgId, imageUrl: imglinki } });
       console.log('Image delete response:', imgDeleteResponse);
-      const studentDeleteResponse = await axios.delete(`http://localhost:3000/student/${secondstId}`);
+      const studentDeleteResponse = await axios.delete(`https://mern-api-ftcs.vercel.app/student/${secondstId}`);
       console.log('Student delete response:', studentDeleteResponse);
-      window.location.reload();
       setIsAuthenticated(true)
+      window.location.reload();
+      
     } catch (error) {
       console.error('Error deleting image or student:', error.response ? error.response.data : error.message);
     }

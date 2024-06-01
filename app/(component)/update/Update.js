@@ -36,13 +36,13 @@ console.log(imgId);
     setShowloader(true)
     const fetchData = async () => {
       try {
-        const studentResponse = await axios.get('http://localhost:3000/student/'+studentData.hjk);
+        const studentResponse = await axios.get('https://mern-api-ftcs.vercel.app/student/'+studentData.hjk);
         console.log("kl",studentResponse.data.student.username);
         setName(studentResponse.data.student.username);
         setFathername(studentResponse.data.student.father);
         setRoll(studentResponse.data.student.Roll);
         setClassn(studentResponse.data.student.classname);
-      const studentimgresponse = await axios.get('http://localhost:3000/img/'+studentData.imgId)
+      const studentimgresponse = await axios.get('https://mern-api-ftcs.vercel.app/img/'+studentData.imgId)
       console.log("jko",studentimgresponse.data.new_img.photo);
       setImg(studentimgresponse.data.new_img.photo)
       setShowloader(false)
@@ -76,9 +76,9 @@ const submithandler = () => {
     } else {
       const formdata = new FormData();
       formdata.append('photo', urlcode);
-      axios.put(`http://localhost:3000/img/${studentData.imgId}`, formdata)
+      axios.put(`https://mern-api-ftcs.vercel.app/img/${studentData.imgId}`, formdata)
         .then(() => {
-          axios.put(`http://localhost:3000/student/${studentData.hjk}`, {
+          axios.put(`https://mern-api-ftcs.vercel.app/student/${studentData.hjk}`, {
             username: name,
             father: fathername,
             Roll: roll,
