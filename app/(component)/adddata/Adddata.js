@@ -53,7 +53,7 @@ useEffect(()=>{
       const formdata = new FormData();
       formdata.append('photo', urlcode);
 
-      axios.post("https://mern-api-ftcs.vercel.app/img", formdata, {
+      axios.post("https://mern-api-edj1.vercel.app/img", formdata, {
         headers:{
           Authorization:'Bearer '+localStorage.getItem("token")
         }
@@ -61,7 +61,7 @@ useEffect(()=>{
         .then(res => {
           console.log(res);
           setImg(img1);
-          axios.post("https://mern-api-ftcs.vercel.app/student", {
+          axios.post("https://mern-api-edj1.vercel.app/student", {
             username: name,
             father: fathername,
             Roll: roll,

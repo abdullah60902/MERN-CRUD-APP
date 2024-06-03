@@ -28,7 +28,7 @@ export default function AccountNew() {
       setErr("Please fill all the fields");
       setShowloader(false);
     } else {
-      axios.post('https://mern-api-ftcs.vercel.app/user/signup', {
+      axios.post('https://mern-api-edj1.vercel.app/user/signup', {
         Name: name1,
         email: email1,
         password: password1,

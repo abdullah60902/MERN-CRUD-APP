@@ -24,7 +24,7 @@ const {setUsername} = useContext(StudentContext)
       setErr("Please fill all the fields");
       setShowloader(false);
     } else {
-      axios.post('https://mern-api-ftcs.vercel.app/user/login', {
+      axios.post('https://mern-api-edj1.vercel.app/user/login', {
         Name: name1,
         password: password1,
         

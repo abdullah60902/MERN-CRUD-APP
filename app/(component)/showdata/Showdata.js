@@ -32,8 +32,8 @@ export default function Showdata() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const imgResponse = await axios.get('https://mern-api-ftcs.vercel.app/img');
-        const studentResponse = await axios.get('https://mern-api-ftcs.vercel.app/student');
+        const imgResponse = await axios.get('https://mern-api-edj1.vercel.app/img');
+        const studentResponse = await axios.get('https://mern-api-edj1.vercel.app/student');
         setStudents(studentResponse.data.Studentdata);
         setImages(imgResponse.data.img_new);
       } catch (err) {
@@ -59,11 +59,11 @@ export default function Showdata() {
   }
   const getTheItemsById = async (index) => {
     try {
-      var GetImgId = await axios.get('https://mern-api-ftcs.vercel.app/img/', idimg)
+      var GetImgId = await axios.get('https://mern-api-edj1.vercel.app/img/', idimg)
       const getimgSucess = GetImgId.data.img_new[index]
       console.log(getimgSucess);
       setImgshowalone(getimgSucess)
-      var GetStudentId = await axios.get('https://mern-api-ftcs.vercel.app/student/', studentid)
+      var GetStudentId = await axios.get('https://mern-api-edj1.vercel.app/student/', studentid)
       const getStudentSucess = GetStudentId.data.Studentdata[index]
       console.log(getStudentSucess);
       setStudentshowalone(getStudentSucess)
@@ -74,13 +74,13 @@ export default function Showdata() {
   };
   const deleteo = async (imglinki, student, index) => {
     const secondstId = student._id;
-    const secImgId = images[index]._id;
+    const secImgId = images[index]?._id;
     console.log('Image ID:', secImgId);
     console.log('Student ID:', secondstId);
     try {
-      const imgDeleteResponse = await axios.delete(`https://mern-api-ftcs.vercel.app/img`, { params: { id: secImgId, imageUrl: imglinki } });
+      const imgDeleteResponse = await axios.delete(`https://mern-api-edj1.vercel.app/img`, { params: { id: secImgId, imageUrl: imglinki } });
       console.log('Image delete response:', imgDeleteResponse);
-      const studentDeleteResponse = await axios.delete(`https://mern-api-ftcs.vercel.app/student/${secondstId}`);
+      const studentDeleteResponse = await axios.delete(`https://mern-api-edj1.vercel.app/student/${secondstId}`);
       console.log('Student delete response:', studentDeleteResponse);
     
       window.location.reload();
@@ -89,10 +89,10 @@ export default function Showdata() {
       console.error('Error deleting image or student:', error.response ? error.response.data : error.message);
     }
   };
-  const handleEdit = (student, index) => {
-    const imgId = images[index]._id;
+  const handleEdit = (imglinki,student, index) => {
+    const imgId = images[index]?._id;
     const hjk = student._id
-    setStudentData({ hjk, imgId })
+    setStudentData({imglinki, hjk, imgId })
     router.push('/Upload');
   }
   const logOut = () => {
@@ -138,8 +138,8 @@ export default function Showdata() {
                       )}
                     </td>
                     <td className="py-4 px-8 border-b border-white ">
-                      <button className='text-[red] text-[60px]' onClick={() => deleteo(img.photo, student, index)}><MdDelete /></button>
-                      <button className='text-[#5fb997] text-[60px] pl-[10px]' onClick={() => (handleEdit(student, index))}
+                      <button className='text-[red] text-[60px]' onClick={() => deleteo(img?.photo, student, index)}><MdDelete /></button>
+                      <button className='text-[#5fb997] text-[60px] pl-[10px]' onClick={() => (handleEdit(img?.photo,student, index))}
                       ><MdEdit /></button>
                     </td>
                   </tr>

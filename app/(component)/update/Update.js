@@ -18,9 +18,9 @@ export default function Update() {
   const [haserr, setHaserr] = useState(false);
   const [showloader, setShowloader] = useState(false);
   const { studentData } = useContext(StudentContext);
-  const { hjk, imgId } = studentData;
+  const {imglinki, hjk, imgId } = studentData;
   const router= useRouter()
-
+var uiop = 23444
   const { isAuthenticated } = useContext(StudentContext);
   useEffect(() => {
     if (!isAuthenticated) {
@@ -36,15 +36,18 @@ console.log(imgId);
     setShowloader(true)
     const fetchData = async () => {
       try {
-        const studentResponse = await axios.get('https://mern-api-ftcs.vercel.app/student/'+studentData.hjk);
+        const studentResponse = await axios.get('https://mern-api-edj1.vercel.app/student/'+studentData.hjk);
         console.log("kl",studentResponse.data.student.username);
         setName(studentResponse.data.student.username);
         setFathername(studentResponse.data.student.father);
         setRoll(studentResponse.data.student.Roll);
         setClassn(studentResponse.data.student.classname);
-      const studentimgresponse = await axios.get('https://mern-api-ftcs.vercel.app/img/'+studentData.imgId)
+      const studentimgresponse = await axios.get('https://mern-api-edj1.vercel.app/img/'+studentData.imgId)
+      
       console.log("jko",studentimgresponse.data.new_img.photo);
       setImg(studentimgresponse.data.new_img.photo)
+      
+
       setShowloader(false)
       } catch (err) {
         setHaserr(true);
@@ -61,6 +64,7 @@ const imgpath = (e) => {
     if (file) {
       setUrlcode(file);
       setImg(URL.createObjectURL(file));
+    
     }
   };
 const submithandler = () => {
@@ -76,15 +80,20 @@ const submithandler = () => {
     } else {
       const formdata = new FormData();
       formdata.append('photo', urlcode);
-      axios.put(`https://mern-api-ftcs.vercel.app/img/${studentData.imgId}`, formdata)
+      formdata.append("main",imglinki)
+      axios.put(`https://mern-api-edj1.vercel.app/img/${studentData.imgId}`, formdata)
         .then(() => {
-          axios.put(`https://mern-api-ftcs.vercel.app/student/${studentData.hjk}`, {
+          axios.put(`https://mern-api-edj1.vercel.app/student/${studentData.hjk}`, {
             username: name,
             father: fathername,
             Roll: roll,
             classname: classn
           }).then(() => {
-            setShowloader(false);
+            
+            axios.delete(`https://mern-api-edj1.vercel.app/img`, { params: { imageUrl: imglinki } })
+  .then(res => {
+    setShowloader(false);
+    console.log(res.data.message);
         router.push('/Showstudent')
           }).catch((err) => {
             console.error(err);
@@ -98,6 +107,17 @@ const submithandler = () => {
           setShowloader(false);
           setErr(err.message);
         });
+  
+    
+  })
+  .catch(error => {
+    console.error('Error deleting image:', error);
+    setShowloader(false)
+    setHaserr(true)
+    setErr( error.message)
+  });
+
+            
         }
   };
   const logOut = ()=>{
